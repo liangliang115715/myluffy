@@ -180,7 +180,7 @@
       get_account_list(){
         this.$http.account_list()
           .then(res => {
-        this.account_list = res.data.account_course_list
+        this.account_list = res.data.account_course_list;
         this.count = res.data.total;
         this.total_price = res.data.total_price;
         this.global_coupons = res.data.global_coupons

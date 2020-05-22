@@ -7,7 +7,7 @@ from api.utils.permission import LoginUserPermission
 
 
 class LogoutView(APIView):
-    authentication_classes = [ExpiringTokenAuthentication]
+    # authentication_classes = [ExpiringTokenAuthentication]
     permission_classes = [LoginUserPermission]
 
     def delete(self, request):

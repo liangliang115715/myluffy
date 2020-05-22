@@ -3,28 +3,27 @@ from rest_framework.exceptions import AuthenticationFailed
 from api.models import Token
 from django.core.cache import cache
 import datetime,pytz
-class LoginAuth(BaseAuthentication):
-    def authenticate(self, request):
-        token =request.META.get('token')
-        # 缓存校验
-        user = cache.get(token)
-        print(token,user)
-        if user:
-            return user,token
-        # 数据库校验
-        token_obj = Token.objects.filter(key=token).first()
-        if not token_obj:
-            raise AuthenticationFailed('验证失败')
-        # 时效校验
-        now = datetime.datetime.now()
-        now = now.replace(tzinfo=pytz.timezone('UTC'))
-        if (now-token_obj.created) > datetime.timedelta(weeks=1):
-            raise AuthenticationFailed('验证时效已过')
-        # 时效验证通过时添加缓存
-        cache_rest_time = (datetime.timedelta(weeks=1) - (now - token_obj.created)).total_seconds()
-        cache.set(token_obj.key,token_obj.user,cache_rest_time)
-        return token_obj.user,token_obj.key
-
+# class LoginAuth(BaseAuthentication):
+#     def authenticate(self, request):
+#         token =request.META.get('token')
+#         # 缓存校验
+#         user = cache.get(token)
+#         print(token,user)
+#         if user:
+#             return user,token
+#         # 数据库校验
+#         token_obj = Token.objects.filter(key=token).first()
+#         if not token_obj:
+#             raise AuthenticationFailed('验证失败')
+#         # 时效校验
+#         now = datetime.datetime.now()
+#         now = now.replace(tzinfo=pytz.timezone('UTC'))
+#         if (now-token_obj.created) > datetime.timedelta(weeks=1):
+#             raise AuthenticationFailed('验证时效已过')
+#         # 时效验证通过时添加缓存
+#         cache_rest_time = (datetime.timedelta(weeks=1) - (now - token_obj.created)).total_seconds()
+#         cache.set(token_obj.key,token_obj.user,cache_rest_time)
+#         return token_obj.user,token_obj.key
 
 class ExpiringTokenAuthentication(BaseAuthentication):
     def authenticate(self, request):

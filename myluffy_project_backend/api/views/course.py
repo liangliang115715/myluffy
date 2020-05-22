@@ -2,7 +2,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from api.models import *
 from api.utils.serializer import CourseSerializers,CourseDetailSerializers,CourseCategorySerializer
-from api.utils.auth import LoginAuth
 from api.utils.filter import CourseFilter
 
 

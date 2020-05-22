@@ -13,18 +13,21 @@ const store = new Vuex.Store({
       state.userinfo = data;
     },
     account_logout(state){
-      state.userinfo={}
+      state.userinfo={};
+      console.log('in mutations')
     }
 
   },
   actions:{
     getUserInfo(context,data){
       context.commit('get_userinfo',data);
-    }
-  },
-  accountLogout(context){
-    context.commit('accountLogout');
+    },
+    accountLogout(context){
+      context.commit('account_logout');
+      console.log('in actions')
   }
+  },
+
 
 });
 

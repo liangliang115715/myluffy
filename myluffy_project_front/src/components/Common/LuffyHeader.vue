@@ -24,7 +24,7 @@
             <el-dropdown-menu></el-dropdown-menu>
               <span class="user">{{ userInfo.username }}</span>
               <img :src="userInfo.head_img" alt="">
-              <ul class="my_account" v-show='isShow'>
+              <ul class="my_account" v-if="isShow">
                   <li>我的账户<i>></i></li>
                   <li @click='myorder'>
                     我的订单
@@ -113,6 +113,7 @@
         this.$http.logout()
           .then(res => {
             localStorage.clear();
+            // sessionStorage.removeItem('store');
             this.$store.dispatch('accountLogout');
             this.isShow = false;
             this.$router.push({
@@ -120,7 +121,7 @@
             })
           })
           .catch(err => {
-
+              console.log(err)
           })
 
       },

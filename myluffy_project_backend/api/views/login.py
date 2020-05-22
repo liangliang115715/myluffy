@@ -1,17 +1,17 @@
 from django.contrib import auth
 from api.models import Token, UserInfo
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSetMixin
+# from rest_framework.viewsets import ViewSetMixin
 from api.utils.serializer import UserInfoSerializer
-from rest_framework.viewsets import generics
+# from rest_framework.viewsets import generics
 from rest_framework.views import APIView
 import binascii
 import os
 from api.utils.response import BaseResponse
 from api.utils.captcha_verify import verify
-from django.utils.timezone import utc
+# from django.utils.timezone import utc
 import datetime
-from django.core.cache import cache
+# from django.core.cache import cache
 
 class LoginView(APIView):
     def generate_key(self):
